@@ -4,7 +4,7 @@ const conductor = new mongoose.Schema({
   _id: {type: String},
   password: {type: String},
   name: {type: String},
-  phone: {type: String},
+  phoneNumber: {type: String},
   conductorLicenseNumber: {type: String, unique: true}
 });
 

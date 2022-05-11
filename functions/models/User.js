@@ -6,7 +6,7 @@ const user = new mongoose.Schema({
   name: {type: String},
   email: {type: String},
   phoneNumber: {type: String},
-  aadharNumber: {type: String}
+  aadharNumber: {type: String, unique: true}
 });
 
 module.exports = mongoose.model("User", user);

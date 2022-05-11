@@ -6,7 +6,11 @@ const path = require("path");
 const cors = require("cors");
 require("./config/database").connect();
 
-// const selfLearning = require("./routes/selfLearning");
+const adminLogin = require("./routes/Auth/AdminLogin");
+const conductorLogin = require("./routes/Auth/ConductorLogin");
+const userLogin = require("./routes/Auth/UserLogin");
+const userRegistration = require("./routes/Auth/UserRegistration");
+const createConductor = require("./routes/Auth/CreateConductor");
 
 app.use(cors());
 app.use(express.json());
@@ -15,9 +19,11 @@ app.get('/',(req,res)=>{
   res.json({message:'Welcome to Swift Transit!'})
 })
 
-// app.use("/user-lead", user_lead);
-
-
+app.use("/admin-login", adminLogin);
+app.use("/conductor-login", conductorLogin);
+app.use("/user-login", userLogin);
+app.use("/user-registration", userRegistration);
+app.use("/create-conductor", createConductor);
 
 
 // const port = process.env.PORT || 5000;
