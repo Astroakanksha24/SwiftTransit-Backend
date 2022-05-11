@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 
 const BusTravel = require('../../models/BusTravel');
+const BusTravelTicketSmart = require("../../models/BusTravelTicketSmart");
+const BusTravelTicketSMS = require("../../models/BusTravelTicketSMS");
 
 router.post('/', async(req, res) => {
     let body = req.body;
@@ -52,6 +54,28 @@ router.post('/bus-travel/end-trip/:id', async(req, res) => {
     return res.status(201).json({
         message: "Trip Ended Successfully!"
     });
+});
+
+router.get('/all-details/:id', async(req, res) => {
+    let id = req.params.id
+    let reqResp = {}
+    let busTravel = await BusTravel.find({_id: id});
+    if(busTravel.length == 0)
+    {
+        return res.status(404).json({
+            message: "ID does not exist"
+        });
+    }
+
+    reqResp['travelData'] = busTravel[0]
+
+    let tickets = await BusTravelTicketSmart.find({busTravelID: id});
+    reqResp['smartTickets'] = tickets
+
+    tickets = await BusTravelTicketSMS.find({busTravelID: id});
+    reqResp['smsTickets'] = tickets
+
+    return res.status(200).json(reqResp);
 });
 
 module.exports = router;
