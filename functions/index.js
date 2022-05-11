@@ -12,6 +12,9 @@ const userLogin = require("./routes/Auth/UserLogin");
 const userRegistration = require("./routes/Auth/UserRegistration");
 const createConductor = require("./routes/Auth/CreateConductor");
 
+const conductor = require("./routes/Conductor/Conductor")
+const user = require("./routes/User/User")
+
 app.use(cors());
 app.use(express.json());
 
@@ -24,6 +27,11 @@ app.use("/conductor-login", conductorLogin);
 app.use("/user-login", userLogin);
 app.use("/user-registration", userRegistration);
 app.use("/create-conductor", createConductor);
+
+app.use("/conductors", conductor);
+app.use("/users", user);
+
+
 
 
 // const port = process.env.PORT || 5000;
