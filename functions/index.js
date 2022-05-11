@@ -15,7 +15,8 @@ const createConductor = require("./routes/Auth/CreateConductor");
 const conductor = require("./routes/Conductor/Conductor")
 const user = require("./routes/User/User")
 
-const buses = require("./routes/Bus/Bus")
+const buses = require("./routes/Bus/Bus");
+const BusTravel = require("./routes/BusTravel/BusTravel");
 
 app.use(cors());
 app.use(express.json());
@@ -33,13 +34,14 @@ app.use("/create-conductor", createConductor);
 app.use("/conductors", conductor);
 app.use("/users", user);
 app.use("/buses", buses);
+app.use("/bus-travel", BusTravel)
 
 
 
-// const port = process.env.PORT || 5000;
-// app.listen(port, () => {
-//   console.log(`Server Listening on ${port}`);
-// });
+const port = process.env.PORT || 5000;
+app.listen(port, () => {
+  console.log(`Server Listening on ${port}`);
+});
 
 exports.api = functions
     .region('asia-south1')
