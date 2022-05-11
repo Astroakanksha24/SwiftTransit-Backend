@@ -1,4 +1,5 @@
 const express = require("express");
+const BusTravelTicketSmart = require("../../models/BusTravelTicketSmart");
 const router = express.Router();
 
 const BusTravelTicket = require('../../models/BusTravelTicketSmart');
@@ -155,5 +156,30 @@ router.post('/complete-ticket-transaction-by-user-cash', async(req, res) => {
         message: "Ticket Booked Successfully!"
     });
 });
+
+/*
+{
+    smartTicketID: ""
+}
+*/
+router.post('/validate-ticket', async(req, res) => {
+    let body = req.body;
+    let smartTicketID = body['smartTicketID'];
+    
+    let theTicket = await BusTravelTicketSmart.find({_id: smartTicketID, ticketStatus: "Success"});
+    if(theTicket.length == 0)
+    {
+        return res.status(404).json({
+            message: "Invalid Ticket"
+        });
+    }
+
+    return res.status(201).json({
+        message: "Valid Ticket"
+    });
+    
+});
+
+
 
 module.exports = router;

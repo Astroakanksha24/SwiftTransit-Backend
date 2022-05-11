@@ -19,7 +19,7 @@ const buses = require("./routes/Bus/Bus");
 const BusTravel = require("./routes/BusTravel/BusTravel");
 
 const BusTravelTicket = require("./routes/BusTravelTicket/BusTravelTicket")
-
+const BusTravelTicketSMS = require("./routes/BusTravelTicket/BusTravelTicketSMS")
 
 app.use(cors());
 app.use(express.json());
@@ -39,6 +39,7 @@ app.use("/users", user);
 app.use("/buses", buses);
 app.use("/bus-travel", BusTravel);
 app.use("/bus-travel-ticket", BusTravelTicket);
+app.use("/bus-travel-ticket-sms", BusTravelTicketSMS)
 
 
 const port = process.env.PORT || 5000;

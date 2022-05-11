@@ -47,4 +47,11 @@ router.get('/conductor/:username', async(req, res) => {
     return res.status(200).json(busTravel);
 });
 
+router.post('/bus-travel/end-trip/:id', async(req, res) => {
+    let updatedTrip = await BusTravel.findOneAndUpdate({_id: req.params.id}, {tripStatus: "Ended"});
+    return res.status(201).json({
+        message: "Trip Ended Successfully!"
+    });
+});
+
 module.exports = router;
