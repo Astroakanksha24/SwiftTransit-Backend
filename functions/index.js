@@ -20,6 +20,8 @@ const BusTravel = require("./routes/BusTravel/BusTravel");
 
 const BusTravelTicket = require("./routes/BusTravelTicket/BusTravelTicket")
 const BusTravelTicketSMS = require("./routes/BusTravelTicket/BusTravelTicketSMS")
+const Payments = require("./routes/Payments/Payments")
+
 
 app.use(cors());
 app.use(express.json());
@@ -40,12 +42,13 @@ app.use("/buses", buses);
 app.use("/bus-travel", BusTravel);
 app.use("/bus-travel-ticket", BusTravelTicket);
 app.use("/bus-travel-ticket-sms", BusTravelTicketSMS)
+app.use("/payments", Payments)
 
 
-const port = process.env.PORT || 5000;
-app.listen(port, () => {
-  console.log(`Server Listening on ${port}`);
-});
+// const port = process.env.PORT || 5000;
+// app.listen(port, () => {
+//   console.log(`Server Listening on ${port}`);
+// });
 
 exports.api = functions
     .region('asia-south1')
