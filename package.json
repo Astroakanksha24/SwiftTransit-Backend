@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/Astroakanksha24/SwiftTransit-Backend/issues"
   },
-  "homepage": "https://github.com/Astroakanksha24/SwiftTransit-Backend#readme"
+  "homepage": "https://github.com/Astroakanksha24/SwiftTransit-Backend#readme",
+  "dependencies": {
+    "mongoose": "^6.3.3"
+  }
 }
