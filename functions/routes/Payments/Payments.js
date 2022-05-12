@@ -52,9 +52,9 @@ router.post('/add-to-wallet', async(req, res) => {
     theUserInstance = theUserInstance[0];
 
     let theUserWallet = theUserInstance['wallet']
-    theUserWallet += amount
+    theUserWallet += parseInt(amount)
 
-    let updatedUserInstance = await User.findOneAndUpdate({_id: userID}, {wallet: theUserWallet})
+    let updatedUserInstance = await User.findOneAndUpdate({_id: userID}, {wallet: parseInt(theUserWallet)})
     let newPayment = await Payment.create(body);
 
     return res.status(201).json({

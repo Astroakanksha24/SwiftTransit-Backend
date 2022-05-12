@@ -1,4 +1,5 @@
 const express = require("express");
+const Bus = require("../../models/Bus");
 const router = express.Router();
 
 const BusTravel = require('../../models/BusTravel');
@@ -76,6 +77,22 @@ router.get('/all-details/:id', async(req, res) => {
     reqResp['smsTickets'] = tickets
 
     return res.status(200).json(reqResp);
+});
+
+router.get('/bus-details/:id', async(req, res) => {
+    let id = req.params.id
+    let busTravel = await BusTravel.find({_id: id});
+    if(busTravel.length == 0)
+    {
+        return res.status(404).json({
+            message: "ID does not exist"
+        });
+    }
+    busTravel = busTravel[0]
+
+    let theBusDetails = await Bus.find({_id: busTravel['busID']})
+
+    return res.status(200).json(theBusDetails[0]);
 });
 
 module.exports = router;

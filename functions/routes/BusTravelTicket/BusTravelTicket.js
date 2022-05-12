@@ -103,7 +103,7 @@ router.post('/complete-ticket-transaction-by-user', async(req, res) => {
         //remove that amount from Wallet
         walletBalance = walletBalance - theTotalPrice;
         let updatedUserInstance = await User.findOneAndUpdate({_id: userID}, {wallet: walletBalance});
-        let updatedTicketInstance = await BusTravelTicket.findOneAndUpdate({_id: ticketID}, {ticketStatus: "Success"});
+        let updatedTicketInstance = await BusTravelTicket.findOneAndUpdate({_id: ticketID}, {ticketStatus: "Success", userID: userID});
         return res.status(201).json({
             message: "Ticket Booked Successfully!"
         })
@@ -150,7 +150,7 @@ router.post('/complete-ticket-transaction-by-user-cash', async(req, res) => {
 
     theUserInstance = theUserInstance[0]
 
-    let updatedTicketInstance = await BusTravelTicket.findOneAndUpdate({_id: ticketID}, {ticketStatus: "Success"});
+    let updatedTicketInstance = await BusTravelTicket.findOneAndUpdate({_id: ticketID}, {ticketStatus: "Success", userID: userID});
 
     return res.status(201).json({
         message: "Ticket Booked Successfully!"
@@ -177,7 +177,13 @@ router.post('/validate-ticket', async(req, res) => {
     return res.status(201).json({
         message: "Valid Ticket"
     });
-    
+
+});
+
+router.get('/tickets-of-user/:username', async(req, res) => {
+    let username = req.params.username;
+    let theTickets = await BusTravelTicketSmart.find({userID: username});
+    return res.status(200).json(theTickets);
 });
 
 
