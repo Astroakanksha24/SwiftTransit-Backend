@@ -38,4 +38,28 @@ router.delete('/user/:username', async(req, res) => {
     });
 });
 
+router.get('/admin-user/:username', async(req, res) => {
+    let username = req.params.username;
+    let theData = await AdminUser.find({_id: username});
+    if(theData.length === 0)
+    {
+        return res.status(404).json({
+            message: "Invalid Username"
+        });
+    }
+    return res.status(200).json(theData[0]);
+});
+
+router.get('/conductor-user/:username', async(req, res) => {
+    let username = req.params.username;
+    let theData = await Conductor.find({_id: username});
+    if(theData.length === 0)
+    {
+        return res.status(404).json({
+            message: "Invalid Username"
+        });
+    }
+    return res.status(200).json(theData[0]);
+});
+
 module.exports = router;
